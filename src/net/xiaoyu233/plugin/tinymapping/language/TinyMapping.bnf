@@ -1,0 +1,43 @@
+{
+  parserClass="net.xiaoyu233.plugin.tinymapping.gen.parser.TinyMappingParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="TinyMapping"
+  psiImplClassSuffix="Impl"
+  psiPackage="net.xiaoyu233.plugin.tinymapping.gen.psi"
+  psiImplPackage="net.xiaoyu233.plugin.tinymapping.gen.psi.impl"
+
+  elementTypeHolderClass="net.xiaoyu233.plugin.tinymapping.gen.psi.TinyMappingTypes"
+  elementTypeClass="net.xiaoyu233.plugin.tinymapping.gen.psi.TinyMappingElementType"
+  tokenTypeClass="net.xiaoyu233.plugin.tinymapping.gen.psi.TinyMappingTokenType"
+}
+
+tinyMapping ::= tinyV1 | tinyV2
+tinyV2 ::= headerV2 ((NEWLINE (clsv2 | commentv2)) | NEWLINE )* <<eof>>
+headerV2 ::= TINY_V2_HEADER(TAB namespace)+
+clsv2 ::= CLASS_V2 TAB class_name (TAB class_name)+ (NEWLINE (fieldv2 | methodv2) )*
+fieldv2 ::= FIELD_V2 TAB type_signature TAB field_name (TAB field_name)+
+methodv2 ::= METHOD_V2 TAB method_signature TAB method_name (TAB method_name)+ (NEWLINE parameterv2)*
+commentv2 ::= COMMENT
+parameterv2 ::= PARAMETER_V2 TAB PARAMETER_INDEX TAB TAB TAB PARAMETER_NAME
+
+tinyV1 ::= headerV1  ((NEWLINE (clsv1 | methodv1 | fieldv1)) | NEWLINE)*  <<eof>>
+headerV1 ::= TINY_V1_HEADER(TAB namespace)+
+clsv1 ::= CLASS_V1 TAB class_name (TAB class_name)+
+fieldv1 ::= FIELD_V1 TAB class_name TAB type_signature TAB field_name (TAB field_name)+
+methodv1 ::= METHOD_V1 TAB class_name TAB method_signature TAB method_name (TAB method_name)+
+
+class_name ::= CLASS_NAME
+field_name ::= FIELD_NAME
+method_name ::= METHOD_NAME
+type_signature ::= TYPE_SIGNATURE
+namespace ::= HEADER_NAMESPACE_ELEMENT
+method_signature ::= METHOD_SIGNATURE
+//TINY_V2_HEADER ::= "regexp:tiny\t2\t0"
+//HEADER_NAMESPACE_ELEMENT ::= "regexp:\w+"
+//CLASS_V2 ::= "c"
+//FIELD_V2 ::= "f"
+//METHOD_V2 ::= "m"
+//TAB ::="	"
+//NEWLINE ::="regexp:\n"

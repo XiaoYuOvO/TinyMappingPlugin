@@ -1,0 +1,40 @@
+<idea-plugin>
+  <id>net.xiaoyu233.plugin.tinymapping</id>
+  <name>Tiny Mapping Support</name>
+  <version>1.0</version>
+  <vendor email="xiao_yu233@qq.com" url="http://www.yourcompany.com">MyHome</vendor>
+
+  <description><![CDATA[
+      Enter short description for your plugin here.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html for description -->
+  <idea-version since-build="203.0"/>
+
+  <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileType name="TinyMapping" implementationClass="net.xiaoyu233.plugin.tinymapping.filetype.TinyMappingFileType" language="TinyMapping" extensions="tiny"/>
+    <lang.parserDefinition
+            language="TinyMapping"
+            implementationClass="net.xiaoyu233.plugin.tinymapping.language.TinyMappingParserDefinition"/>
+    <lang.syntaxHighlighterFactory
+            language="TinyMapping"
+            implementationClass="net.xiaoyu233.plugin.tinymapping.language.TinyMappingSyntaxHighlighterFactory"/>
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+</idea-plugin>
